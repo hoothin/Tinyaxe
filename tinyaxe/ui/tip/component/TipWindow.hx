@@ -28,8 +28,8 @@ class TipWindow extends Sprite {
 			h:25,
 			w:25
 		});
-		UISkinManager.getInstance().initSkinTemplate([UISkinNameEnum.GRAY_BG], function(){
-			UISkinManager.getInstance().setSkinByName(this._boardWidget, UISkinNameEnum.GRAY_BG);
+		UISkinManager.getInstance().initSkinTemplate(["grayBg"], function(){
+			UISkinManager.getInstance().setSkinByName(this._boardWidget, "grayBg");
 		});
 		this.addChild(this._boardWidget);
 		this.initTip();
