@@ -1,0 +1,18 @@
+{
+    "name": "tinyaxe",
+    "url": "https://github.com/hoothin/tinyaxe",
+    "license": "MIT",
+    "tags": [ "Toolkit"],
+    "description": "Cross-Platform Toolkit",
+    "version": "0.1.0",
+    "releasenote": "Initial version.",
+    "contributors": [ "Hoothin" ],
+    "dependencies": {
+    	"stablexui":"",
+    	"spinehaxe":"",
+    	"openfl-tiled":"",
+    	"swf":"",
+    	"unifill":"",
+    	"asparticles":""
+    }
+}
