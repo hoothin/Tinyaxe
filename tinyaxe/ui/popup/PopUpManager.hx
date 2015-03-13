@@ -1,16 +1,16 @@
 package tinyaxe.ui.popup;
 
-import tinyaxe.layer.LayerManager;
-import tinyaxe.resource.xml.WindowConfigXml;
-import tinyaxe.resource.XmlConfigManager;
-import tinyaxe.ui.popup.BasePopUpWindow;
-import tinyaxe.ui.popup.interfaces.IPopUpWindow;
-import tinyaxe.utility.ShortCutsKey;
 import motion.Actuate;
+import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.Lib;
 import org.puremvc.haxe.patterns.facade.Facade;
 import org.puremvc.haxe.patterns.mediator.Mediator;
+import tinyaxe.layer.LayerManager;
+import tinyaxe.resource.xml.WindowConfigXml;
+import tinyaxe.resource.XmlConfigManager;
+import tinyaxe.ui.popup.interfaces.IPopUpWindow;
+import tinyaxe.utility.ShortCutsKey;
 
 /**
  * ...
@@ -64,8 +64,8 @@ class PopUpManager {
 			return preOpenWindow;
 		}
 		
-		preOpenWindow.x = Std.int((Lib.current.stage.stageWidth - preOpenWindow.getWidth()) / 2);
-		preOpenWindow.y = Std.int((Lib.current.stage.stageHeight - preOpenWindow.getHeight()) / 2);
+		cast(preOpenWindow, Sprite).x = Std.int((Lib.current.stage.stageWidth - preOpenWindow.getWidth()) / 2);
+		cast(preOpenWindow, Sprite).y = Std.int((Lib.current.stage.stageHeight - preOpenWindow.getHeight()) / 2);
 		
 		preOpenWindow.openWindow();
 		
@@ -111,7 +111,7 @@ class PopUpManager {
 				sortWindows(openList);
 			}
 			
-			if (this.popUpWindowList.exists(preOpenWindow.windowConfigXmlVO.parent)) {
+			if (preOpenWindow.windowConfigXmlVO.parent != null && this.popUpWindowList.exists(preOpenWindow.windowConfigXmlVO.parent)) {
 				if (this.popUpWindowList[preOpenWindow.windowConfigXmlVO.parent].isOpen) {
 					this.popUpWindowList[preOpenWindow.windowConfigXmlVO.parent].setWindowEnabled(false);
 				}
@@ -223,7 +223,7 @@ class PopUpManager {
 		var singleList = [];
 		for (window in popUpWindowList) {
 			if (window.isOpen) {
-				window.y = Std.int((Lib.current.stage.stageHeight - window.getHeight()) / 2);
+				cast(window, Sprite).y = Std.int((Lib.current.stage.stageHeight - window.getHeight()) / 2);
 				if (window.windowConfigXmlVO != null && 
 				(window.windowConfigXmlVO.left != null ||
 				window.windowConfigXmlVO.right != null)) {
@@ -250,7 +250,7 @@ class PopUpManager {
 		for (windowName in singleList) {
 			var window = popUpWindowList[windowName];
 			if (window == null) continue;
-			window.x = Std.int((Lib.current.stage.stageWidth - window.getWidth()) / 2);
+			cast(window, Sprite).x = Std.int((Lib.current.stage.stageWidth - window.getWidth()) / 2);
 		}
 	}
 }

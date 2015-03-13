@@ -24,6 +24,4 @@ interface IPopUpWindow {
   var windowMediator(get_windowMediator, null):Mediator;
   var windowName(get_windowName, null):String;
   var isOpen(get_isOpen, null):Bool;
-  var x(get, set):Float;
-  var y(get, set):Float;
 }

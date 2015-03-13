@@ -362,7 +362,7 @@ class LoaderManager extends EventDispatcher {
 						resData = new ResData(Xml.parse(string).firstElement(), currentUrl, ResTypeEnum.ResTypeXml);
 						coreTask.pushDataList(resData);
 					}
-				}else {
+				}else if (curLoader.data != null) {
 					resData = new ResData(Xml.parse(cast(curLoader.data, String)).firstElement(), coreTask.currentProcessUrl, ResTypeEnum.ResTypeXml);
 					coreTask.pushDataList(resData);
 				}
@@ -413,7 +413,7 @@ class LoaderManager extends EventDispatcher {
 						resData = new ResData(Xml.parse(string).firstElement(), currentUrl, ResTypeEnum.ResTypeXml);
 						commonTask.pushDataList(resData);
 					}
-				}else {
+				}else if (curLoader.data != null) {
 					resData = new ResData(Xml.parse(cast(curLoader.data, String)).firstElement(), commonTask.currentProcessUrl, ResTypeEnum.ResTypeXml);
 					commonTask.pushDataList(resData);
 				}

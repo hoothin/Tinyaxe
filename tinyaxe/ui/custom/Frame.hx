@@ -35,13 +35,13 @@ class Frame extends Widget{
 			align : 'center,top'
 		});
 		closeBtn = UIBuilder.create(Button, {
-			right : -10,
-			top   : -10,
+			right : -15,
+			top   : -18,
 			w     : 16,
 			h     : 14
 		});
 		this.titleBmp = new Bitmap();
-		this.titleBmp.y = 3;
+		this.titleBmp.y = 25;
 		this.title.mouseChildren = this.title.mouseEnabled = false;
 		this.addChild(titleBgBar);
 		this.titleBgBar.addChild(title);
