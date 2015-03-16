@@ -16,7 +16,7 @@ class UILayer extends Sprite {
 		super();
 		this.maskBG = new Sprite();
 		this.maskBG.graphics.beginFill(0x000000, 0.3);
-		this.maskBG.graphics.drawRect(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
+		this.maskBG.graphics.drawRect(0, 0, LayerManager.SHOW_WIDTH, LayerManager.SHOW_HEIGHT);
 		this.maskBG.graphics.endFill();
 		this.maskBG.visible = false;
 		this.addChild(maskBG);

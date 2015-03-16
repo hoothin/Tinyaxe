@@ -114,8 +114,8 @@ class TipManager {
 	
 	private function reposTipWindow(stageX:Float, stageY:Float):Void {
 		if (this._currentTipWindow != null) {
-			var stageWidth:Float = Lib.current.stage.stageWidth;
-			var stageHeight:Float = Lib.current.stage.stageHeight;
+			var stageWidth:Float = LayerManager.SHOW_WIDTH;
+			var stageHeight:Float = LayerManager.SHOW_HEIGHT;
 			
 			if (stageX < stageWidth / 2 && stageY < stageHeight / 2) {
 				this._currentTipWindow.x = stageX + BOARD_GAP;

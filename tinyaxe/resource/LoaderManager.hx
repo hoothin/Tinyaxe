@@ -27,7 +27,7 @@ import openfl.utils.ByteArray;
  */
 class LoaderManager extends EventDispatcher {
 	public var LOAD_PATH:String = "";
-	private var compressRes:Bool = false;
+	public var compressRes:Bool = true;
 	private var CONFIG_PATH:String = "xml";
 	
 	public static inline var URL_LOAD_COMPLETE:String = "URL_LOAD_COMPLETE";

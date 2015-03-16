@@ -64,8 +64,8 @@ class PopUpManager {
 			return preOpenWindow;
 		}
 		
-		cast(preOpenWindow, Sprite).x = Std.int((Lib.current.stage.stageWidth - preOpenWindow.getWidth()) / 2);
-		cast(preOpenWindow, Sprite).y = Std.int((Lib.current.stage.stageHeight - preOpenWindow.getHeight()) / 2);
+		cast(preOpenWindow, Sprite).x = Std.int((LayerManager.SHOW_WIDTH - preOpenWindow.getWidth()) / 2);
+		cast(preOpenWindow, Sprite).y = Std.int((LayerManager.SHOW_HEIGHT - preOpenWindow.getHeight()) / 2);
 		
 		preOpenWindow.openWindow();
 		
@@ -209,7 +209,7 @@ class PopUpManager {
 		for (window in openList) {
 			totalWidth += Std.int(this.popUpWindowList[window].getWidth());
 		}
-		var leftIndex:Int = Std.int((Lib.current.stage.stageWidth - totalWidth) / 2);
+		var leftIndex:Int = Std.int((LayerManager.SHOW_WIDTH - totalWidth) / 2);
 		for (window in openList) {
 			var curWindow = this.popUpWindowList[window];
 			Actuate.stop(curWindow, null, true, true);
@@ -223,7 +223,7 @@ class PopUpManager {
 		var singleList = [];
 		for (window in popUpWindowList) {
 			if (window.isOpen) {
-				cast(window, Sprite).y = Std.int((Lib.current.stage.stageHeight - window.getHeight()) / 2);
+				cast(window, Sprite).y = Std.int((LayerManager.SHOW_HEIGHT - window.getHeight()) / 2);
 				if (window.windowConfigXmlVO != null && 
 				(window.windowConfigXmlVO.left != null ||
 				window.windowConfigXmlVO.right != null)) {
@@ -250,7 +250,7 @@ class PopUpManager {
 		for (windowName in singleList) {
 			var window = popUpWindowList[windowName];
 			if (window == null) continue;
-			cast(window, Sprite).x = Std.int((Lib.current.stage.stageWidth - window.getWidth()) / 2);
+			cast(window, Sprite).x = Std.int((LayerManager.SHOW_WIDTH - window.getWidth()) / 2);
 		}
 	}
 }

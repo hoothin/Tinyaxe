@@ -5,6 +5,7 @@ import openfl.display.DisplayObject;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.Lib;
+import tinyaxe.layer.LayerManager;
 
 /**
  * @time 2014/1/21 13:34:30
@@ -70,7 +71,7 @@ class NoticeIconManager{
 	Event Handlers
 	-------------------------------------------------------------------------------------------*/
 	private function resizeStage(e:Event = null):Void {
-		this.bottomContainer.x = (Lib.current.stage.stageWidth - this.bottomContentArr.length*(iconW + horizontalPadding)) / 2;
-		this.bottomContainer.y = Lib.current.stage.stageHeight - 80 - this.iconH;
+		this.bottomContainer.x = (LayerManager.SHOW_WIDTH - this.bottomContentArr.length*(iconW + horizontalPadding)) / 2;
+		this.bottomContainer.y = LayerManager.SHOW_HEIGHT - 80 - this.iconH;
 	}
 }

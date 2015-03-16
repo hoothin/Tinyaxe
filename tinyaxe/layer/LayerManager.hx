@@ -19,8 +19,11 @@ class LayerManager {
 	public static var LOADING_LAYER:String = "loadingLayer";
 	public static var CURSOR_LAYER:String = "cursorLayer";
 	public static var TIP_LAYER:String = "tipLayer";
+	public static var SHOW_WIDTH:Int = 0;
+	public static var SHOW_HEIGHT:Int = 0;
 	public var fpsClock(get, null):FPS;
 	public var uiMask(get, null):Sprite;
+	public var rootLayer(get, null):Sprite;
 	private static var layerManager:LayerManager;
 	private var uiLayer:UILayer;
 	private var alertLayer:Sprite;
@@ -31,6 +34,9 @@ class LayerManager {
 	private var loadingLayer:Sprite;
 	private var layerMap:Map<String, DisplayObjectContainer>;
 	public function new() {
+		SHOW_WIDTH = SHOW_WIDTH == 0?Lib.current.stage.stageWidth:SHOW_WIDTH;
+		SHOW_HEIGHT = SHOW_HEIGHT == 0?Lib.current.stage.stageHeight:SHOW_HEIGHT;
+		this.rootLayer = new Sprite();
 		this.mainSceneLayer = new Sprite();
 		this.screenEffectLayer = new Sprite();
 		this.uiLayer = new UILayer();
@@ -39,13 +45,14 @@ class LayerManager {
 		this.cursorLayer = new Sprite();
 		this.tipLayer = new Sprite();
 		
-		Lib.current.addChild(this.mainSceneLayer);
-		Lib.current.addChild(this.screenEffectLayer);
-		Lib.current.addChild(this.uiLayer);
-		Lib.current.addChild(this.alertLayer);
-		Lib.current.addChild(this.loadingLayer);
-		Lib.current.addChild(this.cursorLayer);
-		Lib.current.addChild(this.tipLayer);
+		Lib.current.addChild(this.rootLayer);
+		this.rootLayer.addChild(this.mainSceneLayer);
+		this.rootLayer.addChild(this.screenEffectLayer);
+		this.rootLayer.addChild(this.uiLayer);
+		this.rootLayer.addChild(this.alertLayer);
+		this.rootLayer.addChild(this.loadingLayer);
+		this.rootLayer.addChild(this.cursorLayer);
+		this.rootLayer.addChild(this.tipLayer);
 		
 		this.tipLayer.mouseEnabled = this.tipLayer.mouseChildren = false;
 		this.cursorLayer.mouseEnabled = this.cursorLayer.mouseChildren = false;
@@ -83,22 +90,26 @@ class LayerManager {
 	public function addChildLayer(layer:DisplayObjectContainer, layerName:String, ?position:String = ""):Void {
 		var targetIndex:Int = 0;
 		if (position == "") {
-			targetIndex = Lib.current.getChildIndex(tipLayer) + 1;
+			targetIndex = this.rootLayer.getChildIndex(tipLayer) + 1;
 		}else {
 			var targetLayer:DisplayObjectContainer = layerMap[layerName];
 			if (targetLayer != null)
-				targetIndex = Lib.current.getChildIndex(targetLayer);
+				targetIndex = this.rootLayer.getChildIndex(targetLayer);
 		}
-		if (Lib.current.numChildren < targetIndex) {
-			Lib.current.addChild(layer);
+		if (this.rootLayer.numChildren < targetIndex) {
+			this.rootLayer.addChild(layer);
 		}
-		Lib.current.addChildAt(layer, targetIndex);
+		this.rootLayer.addChildAt(layer, targetIndex);
 		this.layerMap[layerName] = layer;
 	}
 	
 	public function addChildObj(child:DisplayObject, containerName:String):Void {
 		var targetLayer:DisplayObjectContainer = layerMap[containerName];
 		targetLayer.addChild(child);
+	}
+	
+	function get_rootLayer():Sprite {
+		return rootLayer;
 	}
 	
 	function get_uiMask():Sprite {

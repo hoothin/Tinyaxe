@@ -192,10 +192,10 @@ class ScreenObjectManager extends FrameSprite {
 				if (initLoc) {
 					newObj.y = 0;
 				}else {
-					newObj.y = randomSeed * Lib.current.stage.stageHeight;
+					newObj.y = randomSeed * LayerManager.SHOW_HEIGHT;
 				}
 				
-				newObj.x = randomSeed * Lib.current.stage.stageWidth;
+				newObj.x = randomSeed * LayerManager.SHOW_WIDTH;
 				this.showObjArr.push([newObj, 0, randomSeed * 20 - 10, minRate + randomSeed * (maxRate - minRate)]);
 				//this.addChild(newObj);
 			}else {
