@@ -62,6 +62,18 @@ class SkeletonAnimationVO extends FrameSprite {
 		renderer.visible = true;
 	}
 	
+	override public function stop():Void {
+		super.stop();
+		if (this.renderer != null)
+			this.renderer.stop();
+	}
+	
+	override public function start():Void {
+		super.start();
+		if (this.renderer != null)
+			this.renderer.start();
+	}
+	
 	public function changeAction(name:String, ?loop:Bool = true):Void {
 		if (curMotionName == name || this.skeleton == null) return;
 		this.curMotionName = name;

@@ -188,7 +188,7 @@ class PopUpManager {
 	public function finalCloseWindow(windowName:String):Void {
 		var closeWindow:IPopUpWindow = this.popUpWindowList[windowName];
 		if (closeWindow.windowConfigXmlVO != null) {
-			if (this.popUpWindowList.exists(closeWindow.windowConfigXmlVO.parent)) {
+			if (closeWindow.windowConfigXmlVO.parent != null && this.popUpWindowList.exists(closeWindow.windowConfigXmlVO.parent)) {
 				this.popUpWindowList[closeWindow.windowConfigXmlVO.parent].setWindowEnabled(true);
 			}
 		}
@@ -223,7 +223,7 @@ class PopUpManager {
 		var singleList = [];
 		for (window in popUpWindowList) {
 			if (window.isOpen) {
-				cast(window, Sprite).y = Std.int((LayerManager.SHOW_HEIGHT - window.getHeight()) / 2);
+				cast(window, Sprite).y = Std.int((Lib.current.stage.stageHeight - window.getHeight()) / 2);
 				if (window.windowConfigXmlVO != null && 
 				(window.windowConfigXmlVO.left != null ||
 				window.windowConfigXmlVO.right != null)) {
@@ -250,7 +250,7 @@ class PopUpManager {
 		for (windowName in singleList) {
 			var window = popUpWindowList[windowName];
 			if (window == null) continue;
-			cast(window, Sprite).x = Std.int((LayerManager.SHOW_WIDTH - window.getWidth()) / 2);
+			cast(window, Sprite).x = Std.int((Lib.current.stage.stageWidth - window.getWidth()) / 2);
 		}
 	}
 }

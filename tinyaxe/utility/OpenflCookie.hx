@@ -6,8 +6,9 @@ import openfl.net.SharedObject;
  * @author Hoothin
  */
 class OpenflCookie {
-	
-	public static function getCookie(cookieName:String, cookieKey:String):String {
+	public static var cookieName:String = "";
+	public static function getCookie(cookieKey:String, ?_cookieName:String):String {
+		if (_cookieName != null) cookieName = _cookieName;
 		var _cookie = SharedObject.getLocal(cookieName);
 		if (Reflect.hasField(_cookie.data, cookieKey)) {
 			return Reflect.getProperty(_cookie.data, cookieKey);
@@ -15,7 +16,8 @@ class OpenflCookie {
 		return null;
 	}
 	
-	public static function setCookie(cookieName:String, cookieKey:String, cookieValue:String):Void {
+	public static function setCookie(cookieKey:String, cookieValue:String, ?_cookieName:String):Void {
+		if (_cookieName != null) cookieName = _cookieName;
 		var _cookie = SharedObject.getLocal(cookieName);
 		Reflect.setProperty(_cookie.data, cookieKey, cookieValue);
 		_cookie.flush();

@@ -25,13 +25,13 @@ class LayerManager {
 	public var uiMask(get, null):Sprite;
 	public var rootLayer(get, null):Sprite;
 	private static var layerManager:LayerManager;
-	private var uiLayer:UILayer;
-	private var alertLayer:Sprite;
-	private var mainSceneLayer:Sprite;
-	private var screenEffectLayer:Sprite;
-	private var tipLayer:Sprite;
-	private var cursorLayer:Sprite;
-	private var loadingLayer:Sprite;
+	public var uiLayer:UILayer;
+	public var alertLayer:Sprite;
+	public var mainSceneLayer:Sprite;
+	public var screenEffectLayer:Sprite;
+	public var tipLayer:Sprite;
+	public var cursorLayer:Sprite;
+	public var loadingLayer:Sprite;
 	private var layerMap:Map<String, DisplayObjectContainer>;
 	public function new() {
 		SHOW_WIDTH = SHOW_WIDTH == 0?Lib.current.stage.stageWidth:SHOW_WIDTH;

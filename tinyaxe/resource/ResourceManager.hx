@@ -46,7 +46,7 @@ class ResourceManager {
 	 * @param	resourceType
 	 * @param	callBackFunction
 	 * @param	isCoreData true严格分开，互不影响；false共享loader
-	 * @param	coreType -1代表普通资源，0代表场景资源，1代表战斗资源，2代表其他需要步进加载的零碎
+	 * @param	coreType 
 	 * @return
 	 */
 	public static function prepareRes(resourceUrlList:Array<String>, resourceType:ResTypeEnum, ?callBackFunction:Void->Void = null, ?isCoreData:Bool = false, ?coreType:Int = 0):Int {
