@@ -107,7 +107,7 @@ class UISkinManager {
 		for (skinName in this._currentSkinTask.skinNameList) {
 			var skinXmlVO:SkinConfigXmlVO = XmlConfigManager.getXmlVO(SkinConfigXml).getVO(skinName);
 			var skinSrc:String = "piecePool/" + skinName;
-			if (skinXmlVO != null) {
+			if (skinXmlVO != null && skinXmlVO.skinSrc != "") {
 				skinSrc = skinXmlVO.skinSrc;
 			}
 			var skinBitmapData:BitmapData = ResourceManager.getImgBitmapData("assets/ui/" + skinSrc + ".png");
