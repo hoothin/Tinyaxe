@@ -426,11 +426,13 @@ class LoaderManager extends EventDispatcher {
 	}
 	
 	private function coreSecurityErrorHandler(e:SecurityErrorEvent):Void {
+		Debug.trace(e.toString());
 		var curLoader:URLLoader = e.currentTarget;
 		this.coreLoadFail(curLoader);
 	}
 	
 	private function coreIoErrorHandler(e:IOErrorEvent):Void {
+		Debug.trace(e.toString());
 		var curLoader:URLLoader = e.currentTarget;
 		this.coreLoadFail(curLoader);
 	}
@@ -443,12 +445,14 @@ class LoaderManager extends EventDispatcher {
 	}
 	
 	private function commonSecurityErrorHandler(e:SecurityErrorEvent):Void {
+		Debug.trace(e.toString());
 		var curLoader:URLLoader = e.currentTarget;
 		this.commonLoadFail(curLoader);
 	}
 	
 	private function commonIoErrorHandler(e:IOErrorEvent):Void {
 		var curLoader:URLLoader = e.currentTarget;
+		Debug.trace(e.toString());
 		this.commonLoadFail(curLoader);
 	}
 	

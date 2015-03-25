@@ -135,7 +135,7 @@ class ResourceManager {
 		return taskId;
 	}
 	
-	private function prepareResComplete(imgList:Array<ResData>, taskId:Int):Void {		
+	private function prepareResComplete(imgList:Array<ResData>, taskId:Int):Void {
 		for (resData in imgList) {
 			//Lib.trace(resData.resUrl);
 			switch(resData.resType) {

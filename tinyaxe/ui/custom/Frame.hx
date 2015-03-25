@@ -11,7 +11,10 @@ import ru.stablex.ui.widgets.Widget;
  * @time 2013/10/18 11:40:04
  * @author Hoothin
  */
-class Frame extends Widget{
+class Frame extends Widget {
+	@:isVar public var showTitle(get, set):Bool;
+	public var closeAble(get_closeAble, set_closeAble):Bool;
+	public var titleText(get_titleText, set_titleText):String;
 	private var _titleText:String;
 	private var _closeAble:Bool;
 	
@@ -74,8 +77,6 @@ class Frame extends Widget{
 		return _closeAble = value;
 	}
 	
-	public var closeAble(get_closeAble, set_closeAble):Bool;
-	
 	function get_titleText():String {
 		return _titleText;
 	}
@@ -86,5 +87,12 @@ class Frame extends Widget{
 		return _titleText = value;
 	}
 	
-	public var titleText(get_titleText, set_titleText):String;
+	function get_showTitle():Bool {
+		return showTitle;
+	}
+	
+	function set_showTitle(value:Bool):Bool {
+		this.title.visible = this.titleBmp.visible = value;
+		return showTitle = value;
+	}
 }
