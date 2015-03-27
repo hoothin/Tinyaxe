@@ -97,10 +97,18 @@ class XmlConfigManager extends EventDispatcher {
 		var curConfigSetting:ConfigSettingXmlVO = this.configSettingXmlList.get(preLoadConfigSettingList.shift());
 		var configXml:Xml = ResourceManager.getXmlData(XML_URL + curConfigSetting.id + ".xml");
 		if (configXml == null) return;
-		var cl:Class<Dynamic> = Type.resolveClass("tinyaxe.resource.xml." + curConfigSetting.id);
+		var className:String = curConfigSetting.className;
+		if (className == null) {
+			className = curConfigSetting.id;
+		}
+		var cl:Class<Dynamic> = Type.resolveClass("tinyaxe.resource.xml." + className);
 		if (cl == null) {
-			Debug.trace("Xml Class " + curConfigSetting.id + " didn't used!");
-		}else {
+			cl = Type.resolveClass("com.resource.xml." + className);
+			if (cl == null) {
+				Debug.trace("Xml Class com.resource.xml." + curConfigSetting.className + " didn't used!");
+			}
+		}
+		if (cl != null) {
 			var curXmlVO:BaseXmlVO = Type.createInstance(cl, []);
 			if (curXmlVO == null) {
 				Debug.trace(curConfigSetting.id + ".xml pairs none valid Class!");

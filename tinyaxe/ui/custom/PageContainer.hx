@@ -1,7 +1,7 @@
 package tinyaxe.ui.custom;
 
 import tinyaxe.ui.custom.event.PageEvent;
-import com.ui.layouts.SimpleBox;
+import tinyaxe.ui.layouts.SimpleBox;
 import openfl.display.DisplayObject;
 import ru.stablex.ui.UIBuilder;
 import ru.stablex.ui.widgets.Widget;
