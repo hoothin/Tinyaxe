@@ -79,7 +79,7 @@ class UISkinManager {
 				var skinXmlVO:SkinConfigXmlVO = XmlConfigManager.getXmlVO(SkinConfigXml).getVO(skinName);
 				var hasUrl:Bool = false;
 				var skinSrc:String = "piecePool/" + skinName;
-				if (skinXmlVO != null) {
+				if (skinXmlVO != null && skinXmlVO.skinSrc != "") {
 					skinSrc = skinXmlVO.skinSrc;
 				}
 				for (urlName in this._skinUrlList) {
@@ -90,7 +90,7 @@ class UISkinManager {
 				}
 				if (hasUrl == false) {
 					this._skinUrlList.push("assets/ui/" + skinSrc + ".png");
-					if (skinXmlVO != null) {
+					if (skinXmlVO != null && skinXmlVO.skinSrc != "") {
 						this._xmlUrlList.push("assets/xml/texture/" + skinSrc + ".xml");
 					}
 				}
@@ -118,22 +118,25 @@ class UISkinManager {
 				this._skinMap.set(skinName, imgSkin);
 				continue;
 			}
-			var skinXml:Xml = ResourceManager.getXmlData("assets/xml/texture/" + skinSrc + ".xml");
-			var textureVO:TextureAtlasXmlVO = _textureAtlasMap.get(skinSrc);
-			if (textureVO == null) {
-				textureVO = new TextureAtlasXmlVO();
-				textureVO.initByXml(skinXml);
-				_textureAtlasMap.set(skinSrc, textureVO);
-			}
-			var finalBitmapData:BitmapData = null;
-			for (sprite in textureVO.spriteList) {
-				if (sprite.id == (skinXmlVO.skinName + ".png")) {
-					finalBitmapData = new BitmapData(sprite.w, sprite.h);
-					finalBitmapData.lock();
-					finalBitmapData.copyPixels(skinBitmapData, new Rectangle(sprite.x, sprite.y, sprite.w, sprite.h), new Point());
-					finalBitmapData.unlock();
+			var finalBitmapData:BitmapData = skinBitmapData;
+			if (skinXmlVO != null && skinXmlVO.skinSrc != "") {
+				var skinXml:Xml = ResourceManager.getXmlData("assets/xml/texture/" + skinSrc + ".xml");
+				var textureVO:TextureAtlasXmlVO = _textureAtlasMap.get(skinSrc);
+				if (textureVO == null) {
+					textureVO = new TextureAtlasXmlVO();
+					textureVO.initByXml(skinXml);
+					_textureAtlasMap.set(skinSrc, textureVO);
+				}
+				for (sprite in textureVO.spriteList) {
+					if (sprite.id == (skinXmlVO.skinName + ".png")) {
+						finalBitmapData = new BitmapData(sprite.w, sprite.h);
+						finalBitmapData.lock();
+						finalBitmapData.copyPixels(skinBitmapData, new Rectangle(sprite.x, sprite.y, sprite.w, sprite.h), new Point());
+						finalBitmapData.unlock();
+					}
 				}
 			}
+			
 			if (skinXmlVO.slice9List.length == 4) {
 				var slice9Skin:Slice9 = new Slice9();
 				slice9Skin.smooth = skinXmlVO.smooth;
