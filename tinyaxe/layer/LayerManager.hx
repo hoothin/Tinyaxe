@@ -92,7 +92,7 @@ class LayerManager {
 		if (position == "") {
 			targetIndex = this.rootLayer.getChildIndex(tipLayer) + 1;
 		}else {
-			var targetLayer:DisplayObjectContainer = layerMap[layerName];
+			var targetLayer:DisplayObjectContainer = layerMap[position];
 			if (targetLayer != null)
 				targetIndex = this.rootLayer.getChildIndex(targetLayer);
 		}

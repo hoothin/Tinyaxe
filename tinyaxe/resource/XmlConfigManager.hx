@@ -105,7 +105,7 @@ class XmlConfigManager extends EventDispatcher {
 		if (cl == null) {
 			cl = Type.resolveClass("com.resource.xml." + className);
 			if (cl == null) {
-				Debug.trace("Xml Class com.resource.xml." + curConfigSetting.className + " didn't used!");
+				Debug.trace("Xml Class com.resource.xml." + className + " didn't used!");
 			}
 		}
 		if (cl != null) {
