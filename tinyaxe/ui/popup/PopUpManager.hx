@@ -60,7 +60,7 @@ class PopUpManager {
 		var preOpenWindow:IPopUpWindow = this.popUpWindowList.get(windowName);
 		
 		if (preOpenWindow.isOpen) {
-			this.closeWindow(preOpenWindow.windowName);
+			//this.closeWindow(preOpenWindow.windowName);
 			return preOpenWindow;
 		}
 		
