@@ -45,7 +45,7 @@ class ResourceManager {
 	 * @param	resourceUrlList
 	 * @param	resourceType
 	 * @param	callBackFunction
-	 * @param	isCoreData true严格分开，互不影响；false共享loader
+	 * @param	isCoreData true严格分开，互不影响，0是皮肤等专用，不应抢占；false共享loader
 	 * @param	coreType 
 	 * @return
 	 */

@@ -38,8 +38,8 @@ class Frame extends Widget {
 			align : 'center,top'
 		});
 		closeBtn = UIBuilder.create(Button, {
-			right : -15,
-			top   : -18,
+			left : 10,
+			top   : 10,
 			w     : 16,
 			h     : 14
 		});
