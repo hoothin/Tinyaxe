@@ -64,9 +64,12 @@ class LoadTask {
 		}
 	}
 	
-	public function gotoNextUrl():Void {
-		this._urlIndex ++;
+	public function gotoNextUrl(?fail:Bool = false):Void {
 		this._failedTime = 0;
+		if (fail) {
+			this._originalUrl.remove(this._currentProcessUrl);
+		}
+		this._urlIndex ++;
 	}
 	
 	public function failed():Void {

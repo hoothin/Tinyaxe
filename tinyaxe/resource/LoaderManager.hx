@@ -201,7 +201,7 @@ class LoaderManager extends EventDispatcher {
 			}else {
 				commonTask.failed();
 				if (commonTask.failedTime >= 3) {
-					commonTask.gotoNextUrl();
+					commonTask.gotoNextUrl(true);
 				}
 			}
 			var currentUrl:String = commonTask.getCurrentUrl();
@@ -261,7 +261,7 @@ class LoaderManager extends EventDispatcher {
 			}else {
 				curTask.failed();
 				if (curTask.failedTime >= 3) {
-					curTask.gotoNextUrl();
+					curTask.gotoNextUrl(true);
 				}
 			}
 			var currentUrl:String = curTask.getCurrentUrl();
@@ -440,6 +440,7 @@ class LoaderManager extends EventDispatcher {
 	private function coreLoadFail(curLoader:URLLoader):Void {
 		var curTask:LoadTask = this.taskMap.get(curLoader);
 		if (curTask != null) {
+			Debug.trace("url:" + curTask.currentProcessUrl + " load fail");
 			this.beginCoreTask(curLoader, false);
 		}
 	}

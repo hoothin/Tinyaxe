@@ -13,6 +13,7 @@ class EnterFrameManager {
 	private var _currentRegisterId:Int;
 	private var _enterFrameSpriteList:Array<FrameSprite>;
 	private static var _enterFrameManager:EnterFrameManager;
+	private var isInit:Bool;
 	public static function getInstance():EnterFrameManager {
 		if (_enterFrameManager == null) {
 			_enterFrameManager = new EnterFrameManager();
@@ -24,13 +25,18 @@ class EnterFrameManager {
 	public function new() {
 		this._enterFrameSpriteList = new Array<FrameSprite>();
 		this._currentRegisterId = 0;
+		this.isInit = false;
 	}
 	
 	public function init():Void {
+		if (isInit) return;
+		this.isInit = true;
 		Lib.current.addEventListener(Event.ENTER_FRAME, enterFrameProcess);
 	}
 	
 	public function stop():Void {
+		if (!isInit) return;
+		this.isInit = false;
 		Lib.current.removeEventListener(Event.ENTER_FRAME, enterFrameProcess);
 	}
 	
