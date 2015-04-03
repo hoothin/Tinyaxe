@@ -22,9 +22,6 @@ class SkeletonAnimationVO extends FrameSprite {
 	public function new() {
 		super();
 		this.mouseChildren = false;
-		//this.graphics.beginFill(0xffffff);
-		//this.graphics.drawRect( -5, -20, 10, 20);
-		//this.graphics.endFill();
 	}
 
 	/*-----------------------------------------------------------------------------------------
@@ -108,7 +105,6 @@ class SkeletonAnimationVO extends FrameSprite {
 	Private methods
 	-------------------------------------------------------------------------------------------*/
 	private function initAnimation(name:String, defaultMotion:String):Void {
-		//return;
 		stateData = SkeletonAnimationManager.getInstance().getStateData(name);
 		state = new AnimationState(stateData);
 		curMotionName = defaultMotion;

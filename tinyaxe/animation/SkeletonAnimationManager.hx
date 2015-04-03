@@ -11,16 +11,12 @@ import spinehaxe.SkeletonJson;
  * @time 2014/12/29 14:34:03
  * @author Hoothin
  */
-class SkeletonAnimationManager{
+class SkeletonAnimationManager {
 
 	static var skeletonAnimationManager:SkeletonAnimationManager;
-	var atlasMap:Map<String, Atlas>;
-	var jsonMap:Map<String, SkeletonJson>;
-	var jsonStrMap:Map<String, String>;
+	var skeletonDataMap:Map<String, SkeletonData>;
 	public function new() {
-		atlasMap = new Map();
-		jsonMap = new Map();
-		jsonStrMap = new Map();
+		skeletonDataMap = new Map();
 	}
 
 	/*-----------------------------------------------------------------------------------------
@@ -34,22 +30,13 @@ class SkeletonAnimationManager{
 	}
 	
 	public function getStateData(name:String):AnimationStateData {
-		var atlas = atlasMap.get(name);
-		if (atlas == null) {
-			atlas = new Atlas(Assets.getText("assets/skeleton/" + name + ".atlas"), new BitmapDataTextureLoader("assets/skeleton/"));
-			this.atlasMap.set(name, atlas);
+		var skeletonData:SkeletonData = skeletonDataMap.get(name);
+		if (skeletonData == null) {
+			var atlas = new Atlas(Assets.getText("assets/skeleton/" + name + ".atlas"), new BitmapDataTextureLoader("assets/skeleton/"));
+			var json = new SkeletonJson(new AtlasAttachmentLoader(atlas));
+			skeletonData = json.readSkeletonData(Assets.getText("assets/skeleton/" + name + ".json"), name);
+			this.skeletonDataMap.set(name, skeletonData);
 		}
-		var json = jsonMap.get(name);
-		if (json == null) {
-			json = new SkeletonJson(new AtlasAttachmentLoader(atlas));
-			this.jsonMap.set(name, json);
-		}
-		var jsonStr = jsonStrMap.get(name);
-		if (jsonStr == null) {
-			jsonStr = Assets.getText("assets/skeleton/" + name + ".json");
-			this.jsonStrMap.set(name, jsonStr);
-		}
-		var skeletonData:SkeletonData = json.readSkeletonData(jsonStr, name);
 		var stateData:AnimationStateData = new AnimationStateData(skeletonData);
 		for (aniX in skeletonData.animations) {
 			var aniXName:String = aniX.name;
