@@ -1,5 +1,6 @@
 package tinyaxe.ui.custom;
 
+import flash.events.Event;
 import tinyaxe.utility.TimeKeeper;
 import openfl.display.BlendMode;
 import openfl.display.Shape;
@@ -77,6 +78,7 @@ class ProgressBar extends Progress{
 			var percent:Int = Std.int(this.bar.widthPt);
 			this.progressText.text = percent + "%";
 		}
+		this.bar.addEventListener(WidgetEvent.RESIZE, barResizeHandler);
 	}
 	/*-----------------------------------------------------------------------------------------
 	Private methods
@@ -129,6 +131,10 @@ class ProgressBar extends Progress{
 	private function rollHandler(e:MouseEvent):Void {
 		if(labelStyle != 0 && rollShow)
 		this.progressText.visible = e.type == MouseEvent.ROLL_OVER;
+	}
+	
+	private function barResizeHandler(e:Event):Void {
+		this.bar.applySkin();
 	}
 	
 	function get_progressName():String {
