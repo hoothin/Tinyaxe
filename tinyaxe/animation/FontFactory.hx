@@ -18,18 +18,20 @@ class FontFactory extends EventDispatcher {
 	public static inline var COMPLETE:String = "FONT_FACTORY_INIT_COMPLETE";	
 	public var FONT_WIDTH:Int = 25;
 	public var FONT_HEIGHT:Int = 34;
-	
+	public var isComplete(get, null):Bool;
 	private var fontList:Map<String, BitmapData>;
 	private var fontName:String;
 	public function new() {
 		super();
 		this.fontList = new Map<String, BitmapData>();
+		this.isComplete = false;
 	}
 	
 	public function initFactory(?fontName:String = "font", ?FONT_WIDTH:Int = 25, ?FONT_HEIGHT:Int = 34):Void {
 		this.FONT_HEIGHT = FONT_HEIGHT;
 		this.FONT_WIDTH = FONT_WIDTH;
 		this.fontName = fontName;
+		this.isComplete = false;
 		ResourceManager.prepareRes(["assets/res/" + fontName + ".png"], ResTypeEnum.ResTypeImage, loadFontComplete);
 		ResourceManager.prepareRes(["assets/xml/texture/" + fontName + ".xml"], ResTypeEnum.ResTypeXml, loadFontComplete);
 	}
@@ -71,5 +73,10 @@ class FontFactory extends EventDispatcher {
 		}
 		ResourceManager.disposeBmd(fontBitmapUrl);
 		this.dispatchEvent(new Event(COMPLETE));
+		this.isComplete = true;
+	}
+	
+	function get_isComplete():Bool {
+		return isComplete;
 	}
 }
