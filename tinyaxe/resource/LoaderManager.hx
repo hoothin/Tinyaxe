@@ -193,6 +193,10 @@ class LoaderManager extends EventDispatcher {
 		return totalNum;
 	}
 	
+	public function completeHandler(task:LoadTask):Void {
+		this.completedTask.remove(task);
+	}
+	
 	private function beginCommonTask(curLoader:URLLoader, ?isSuccess:Bool = true):Void {
 		var commonTask:LoadTask = this.taskMap.get(curLoader);
 		if (commonTask != null) {
@@ -341,6 +345,8 @@ class LoaderManager extends EventDispatcher {
 						var name:String = urlArr.pop();
 						name = name.substring(0, name.lastIndexOf("."));
 						bmd = slideSwf.getBitmapData(name);
+						if (bmd == null)
+						throw(new Error(coreTask.currentProcessUrl + " has no valid res!"));
 						resData =  new ResData(bmd, coreTask.currentProcessUrl, ResTypeEnum.ResTypeImage);
 						coreTask.pushDataList(resData);
 						this.beginCoreTask(curLoader);
@@ -392,6 +398,8 @@ class LoaderManager extends EventDispatcher {
 						var name:String = urlArr.pop();
 						name = name.substring(0, name.lastIndexOf("."));
 						bmd = slideSwf.getBitmapData(name);
+						if (bmd == null)
+						throw(new Error(commonTask.currentProcessUrl + " has no valid res!"));
 						resData =  new ResData(bmd, commonTask.currentProcessUrl, ResTypeEnum.ResTypeImage);
 						commonTask.pushDataList(resData);
 						this.beginCommonTask(curLoader);

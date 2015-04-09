@@ -148,7 +148,7 @@ class ResourceManager {
 			}
 		}
 		var allComplete:Bool = true;
-		for (task in LoaderManager.getInstance().completedTask) {
+		for (task in LoaderManager.getInstance().completedTask.copy()) {
 			allComplete = true;
 			var filterResList:Map<String, Dynamic> = null;
 			switch(task.taskType) {
@@ -173,6 +173,7 @@ class ResourceManager {
 				}
 			}
 			if (allComplete) {
+				LoaderManager.getInstance().completeHandler(task);
 				TimeKeeper.addTimerEventListener(resCompleteHandler, 0, [task.taskUID]);
 				//resCompleteHandler(task.taskUID);
 			}
