@@ -45,9 +45,9 @@ class ResourceManager {
 	 * @param	resourceUrlList
 	 * @param	resourceType
 	 * @param	callBackFunction
-	 * @param	isCoreData true严格分开，互不影响，0是皮肤等专用，不应抢占；false共享loader
-	 * @param	coreType 
-	 * @return
+	 * @param	isCoreData true严格分开，互不影响，false共享loader
+	 * @param	coreType 0是皮肤等专用，不应抢占
+	 * @return	taskId
 	 */
 	public static function prepareRes(resourceUrlList:Array<String>, resourceType:ResTypeEnum, ?callBackFunction:Void->Void = null, ?isCoreData:Bool = false, ?coreType:Int = 0):Int {
 		return getInstance().prepareResHandler(resourceUrlList, resourceType, callBackFunction, isCoreData, coreType);
