@@ -1,4 +1,9 @@
 package tinyaxe.resource;
+import openfl.utils.SystemPath;
+#if android
+import sys.FileSystem;
+#else
+#end
 import tinyaxe.resource.enums.ResTypeEnum;
 import tinyaxe.resource.event.ResLoadingEvent;
 import tinyaxe.resource.res.ResData;
@@ -236,7 +241,13 @@ class LoaderManager extends EventDispatcher {
 					case LoadTask.TASK_BINARY:
 						curLoader.dataFormat = URLLoaderDataFormat.BINARY;
 				}
-				try{
+				try {
+					#if android
+					if (FileSystem.exists( SystemPath.applicationStorageDirectory + currentUrl )) {
+						urlRequest = new URLRequest(SystemPath.applicationStorageDirectory + currentUrl);
+					}
+					#else
+					#end
 					curLoader.load(urlRequest);
 				}catch (e:Error) {
 					trace(e.toString());
@@ -297,7 +308,13 @@ class LoaderManager extends EventDispatcher {
 					case LoadTask.TASK_BINARY:
 						curLoader.dataFormat = URLLoaderDataFormat.BINARY;
 				}
-				try{//android下不存在直接throw error了啊泥煤！!
+				try {//android下不存在直接throw error了啊泥煤！!
+					#if android
+					if (FileSystem.exists( SystemPath.applicationStorageDirectory + currentUrl )) {
+						urlRequest = new URLRequest(SystemPath.applicationStorageDirectory + currentUrl);
+					}
+					#else
+					#end
 					curLoader.load(urlRequest);
 				}catch (e:Error) {
 					trace(e.toString());
