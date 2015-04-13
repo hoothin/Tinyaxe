@@ -22,5 +22,11 @@ class OpenflCookie {
 		Reflect.setProperty(_cookie.data, cookieKey, cookieValue);
 		_cookie.flush();
 	} 
+	
+	public static function clear(?_cookieName:String):Void {
+		if (_cookieName != null) cookieName = _cookieName;
+		var _cookie = SharedObject.getLocal(cookieName);
+		_cookie.clear();
+	}
 
 }
